@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  has_secure_password  # Mecanismo nativo de autenticação do rails
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
 
   enum :role, { admin: 0, collaborator: 1, resident: 2 }
 
@@ -9,7 +10,5 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   validates :name, presence: true
-  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }  # validação de formato de email
   validates :role, presence: true
-  validates :password, length: { minimum: 6 }, if: -> { password.present? }
 end
