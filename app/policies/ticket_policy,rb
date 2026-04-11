@@ -1,0 +1,41 @@
+class TicketPolicy < ApplicationPolicy
+  
+  # O scope irá definir o que cada tipo de usuário pode ver
+  def index?
+    true
+  end
+
+  def show?
+    admin_or_collaborator? || resident_owns_ticket?
+  end
+
+  def new?
+    resident? || admin?
+  end
+
+  def create?
+    resident? || admin?
+  end
+
+  def update_status?
+    admin_or_collaborator?
+  end
+
+  class Scope < ApplicationPolicy::Scope
+    def resolve
+      if user.admin? || user.collaborator?
+        scope.all
+      elsif user.resident?
+        scope.where(unit: user.units)
+      else
+        scope.none
+      end
+    end
+  end
+
+  private
+
+  def resident_owns_ticket?
+    user.resident? && user.units.include?(record.unit)
+  end
+end
