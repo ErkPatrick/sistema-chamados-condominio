@@ -1,7 +1,7 @@
-<% content_for(:title, "Editar #{@user.name}") %>
+<% content_for(:title, "Editar Usuário") %>
 
 <div class="flex items-center justify-between mb-6">
-  <h1 class="text-2xl font-bold text-gray-800">Editar <%= @user.name %></h1>
+  <h1 class="text-2xl font-bold text-gray-800">Editar <span class="font-normal italic"><%= @user.name %></span></h1>
   <%= link_to "Voltar", users_path, class: "bg-gray-200 text-gray-700 px-4 py-2 rounded hover:bg-gray-300" %>
 </div>
 
@@ -13,7 +13,7 @@
         <ul class="list-disc list-inside text-sm">
           <% @user.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
-          <% end %>
+          <% end %> 
         </ul>
       </div>
     <% end %>

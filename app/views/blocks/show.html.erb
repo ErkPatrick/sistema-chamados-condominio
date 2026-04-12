@@ -1,0 +1,39 @@
+<% content_for(:title, "Bloco #{@block.identifier}") %>
+
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-2xl font-bold text-gray-800">Bloco <%= @block.identifier %></h1>
+  <%= link_to "Voltar", blocks_path, class: "bg-gray-200 text-gray-700 px-4 py-2 rounded hover:bg-gray-300" %>
+</div>
+
+<div class="bg-white rounded-lg shadow p-6 mb-6">
+  <h2 class="text-lg font-semibold text-gray-800 mb-4">Informações</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div>
+      <p class="text-sm text-gray-500">Identificador</p>
+      <p class="text-gray-800 font-medium"><%= @block.identifier %></p>
+    </div>
+    <div>
+      <p class="text-sm text-gray-500">Andares</p>
+      <p class="text-gray-800 font-medium"><%= @block.floors %></p>
+    </div>
+    <div>
+      <p class="text-sm text-gray-500">Aptos por Andar</p>
+      <p class="text-gray-800 font-medium"><%= @block.units_per_floor %></p>
+    </div>
+  </div>
+</div>
+
+<div class="bg-white rounded-lg shadow p-6">
+  <h2 class="text-lg font-semibold text-gray-800 mb-4">
+    Unidades: (<%= @block.units.count %>)
+  </h2>
+  <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+    <% @block.units.order(:floor, :number).each do |unit| %>
+      <%= link_to unit_path(unit), class: "border rounded-lg p-3 text-center hover:bg-blue-50 hover:border-blue-300 transition" do %>
+        <p class="font-medium text-gray-800"><%= unit.identifier %></p>
+        <p class="text-xs text-gray-500">Andar <%= unit.floor %></p>
+        <p class="text-xs text-gray-500"><%= unit.users.count %> morador(es)</p>
+      <% end %>
+    <% end %>
+  </div>
+</div>

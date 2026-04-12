@@ -1,0 +1,36 @@
+<% content_for(:title, "Blocos") %>
+
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-2xl font-bold text-gray-800">Blocos</h1>
+  <%= link_to "Novo Bloco", new_block_path, class: "bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" %>
+</div>
+
+<div class="bg-white rounded-lg shadow overflow-hidden">
+  <table class="w-full text-sm">
+    <thead class="bg-gray-50">
+      <tr class="text-left text-gray-500">
+        <th class="px-4 py-3">Identificador</th>
+        <th class="px-4 py-3">Andares</th>
+        <th class="px-4 py-3">Aptos por Andar</th>
+        <th class="px-4 py-3">Total de Unidades</th>
+        <th class="px-4 py-3">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @blocks.each do |block| %>
+        <tr class="border-t hover:bg-gray-50">
+          <td class="px-4 py-3 font-medium"><%= block.identifier %></td>
+          <td class="px-4 py-3"><%= block.floors %></td>
+          <td class="px-4 py-3"><%= block.units_per_floor %></td>
+          <td class="px-4 py-3"><%= block.units.count %></td>
+          <td class="px-4 py-3 flex gap-2">
+            <%= link_to "Ver", block_path(block), class: "text-white bg-blue-500 px-2 py-1 rounded cursor-pointer hover:bg-blue-600" %>
+            <%= button_to "Remover", block_path(block), method: :delete,
+                data: { turbo_confirm: "Tem certeza? Todas as unidades serão removidas!" },
+                class: "text-white bg-red-500 px-2 py-1 rounded cursor-pointer hover:bg-red-600" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
