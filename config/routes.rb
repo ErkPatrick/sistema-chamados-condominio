@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   root to: "dashboard#index"
 
   resources :blocks, only: [:index, :new, :create, :show, :destroy]
-  resources :units, only: [:index, :show]
-  resources :unit_users, only: [:create, :destroy]
+  resources :units, only: [:index, :show] do
+    resources :unit_users, only: [:create, :destroy]
+  end
   resources :ticket_types, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :ticket_statuses, only: [:index, :new, :create, :edit, :update, :destroy]
 

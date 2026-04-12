@@ -1,5 +1,4 @@
 class TicketPolicy < ApplicationPolicy
-  
   # O scope irá definir o que cada tipo de usuário pode ver
   def index?
     true
