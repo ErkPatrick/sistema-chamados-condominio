@@ -36,7 +36,7 @@
           </div>
         <% end %>
         <div>
-          <p class="text-sm text-gray-500">SLA</p>
+          <p class="text-sm text-gray-500">Tempo Máximo de Resolução (SLA)</p>
           <% sla_deadline = @ticket.opened_at + @ticket.ticket_type.sla_hours.hours %>
           <% if @ticket.ticket_status.is_final? %>
             <span class="text-green-600 font-medium">Concluído no prazo</span>

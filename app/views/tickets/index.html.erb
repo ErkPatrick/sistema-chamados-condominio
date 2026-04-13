@@ -17,12 +17,11 @@
         <th class="px-4 py-3">Status</th>
         <th class="px-4 py-3">Aberto em</th>
         <th class="px-4 py-3">SLA</th>
-        <th class="px-4 py-3">Ações</th>
       </tr>
     </thead>
     <tbody>
       <% @tickets.each do |ticket| %>
-        <tr class="border-t hover:bg-gray-50">
+        <tr class="border-t hover:bg-gray-50 cursor-pointer" onclick="window.location='<%= ticket_path(ticket) %>'">
           <td class="px-4 py-3">#<%= ticket.id %></td>
           <td class="px-4 py-3"><%= ticket.unit.identifier %></td>
           <td class="px-4 py-3"><%= ticket.ticket_type.title %></td>
@@ -41,9 +40,6 @@
             <% else %>
               <span class="text-gray-600"><%= sla_deadline.strftime("%d/%m/%Y") %></span>
             <% end %>
-          </td>
-          <td class="px-4 py-3">
-            <%= link_to "Ver", ticket_path(ticket), class: "text-blue-600 hover:underline" %>
           </td>
         </tr>
       <% end %>

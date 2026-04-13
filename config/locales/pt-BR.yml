@@ -1,0 +1,39 @@
+pt-BR:
+  errors:
+    messages:
+      blank: "não pode ficar em branco"
+      taken: "já está em uso"
+      too_short: "é muito curto (mínimo: %{count} caracteres)"
+      too_long: "é muito longo (máximo: %{count} caracteres)"
+      invalid: "é inválido"
+      confirmation: "não é igual a %{attribute}"
+      not_a_number: "não é um número"
+      greater_than: "deve ser maior que %{count}"
+      less_than: "deve ser menor que %{count}"
+      inclusion: "não está incluído na lista"
+      empty: "não pode ficar vazio"
+      
+  activerecord:
+    attributes:
+      user:
+        name: "Nome"
+        email: "E-mail"
+        password: "Senha"
+        password_confirmation: "Confirmação de senha"
+      block:
+        identifier: "Identificador"
+        floors: "Andares"
+        units_per_floor: "Apartamentos por andar"
+      ticket:
+        description: "Descrição"
+        unit: "Unidade"
+        ticket_type: "Tipo de chamado"
+        ticket_status: "Status"
+      ticket_type:
+        title: "Título"
+        sla_hours: "SLA (horas)"
+      ticket_status:
+        name: "Nome"
+    errors:
+      messages:
+        record_invalid: "Validação falhou: %{errors}"

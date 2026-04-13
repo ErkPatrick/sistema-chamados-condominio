@@ -8,9 +8,8 @@ class Ticket < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   validates :description, presence: true
-  validates :opened_at, presence: true
 
-  before_create :set_default_status
+  before_validation :set_default_status, on: :create  # apenas no momento de criação, para não dar problema no edit
   before_create :set_opened_at
   before_save :set_closed_at
 

@@ -32,10 +32,18 @@ class UsersController < ApplicationController
   def update
     authorize @user
 
-    if @user.update(user_params)
-      redirect_to users_path, notice: "Usuário atualizado com sucesso!"
+    if user_params[:password].blank?
+      if @user.update_without_password(user_params.except(:password, :password_confirmation))
+        redirect_to users_path, notice: "Usuário atualizado com sucesso!"
+      else
+        render :edit, status: :unprocessable_entity
+      end
     else
-      render :edit, status: :unprocessable_entity  # Se falhar reexibe o formulário com os erros
+      if @user.update(user_params)
+        redirect_to users_path, notice: "Usuário atualizado com sucesso!"
+      else
+        render :edit, status: :unprocessable_entity
+      end
     end
   end
 

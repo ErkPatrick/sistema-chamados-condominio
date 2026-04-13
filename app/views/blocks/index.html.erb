@@ -26,7 +26,7 @@
           <td class="px-4 py-3 flex gap-2">
             <%= link_to "Ver", block_path(block), class: "text-white font-semibold bg-blue-500 px-2 py-1 rounded cursor-pointer hover:bg-blue-600" %>
             <%= button_to "Remover", block_path(block), method: :delete,
-                data: { turbo_confirm: "Tem certeza? Todas as unidades serão removidas!" },
+                form: { data: { turbo_confirm: "Tem certeza? Todas as unidades serão removidas!" } },
                 class: "text-white font-semibold bg-red-500 px-2 py-1 rounded cursor-pointer hover:bg-red-600" %>
           </td>
         </tr>

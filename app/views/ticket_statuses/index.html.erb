@@ -36,7 +36,7 @@
           <td class="px-4 py-3 flex gap-2">
             <%= link_to "Editar", edit_ticket_status_path(status), class: "text-white font-semibold bg-yellow-500 hover:bg-yellow-600 px-3 py-1 rounded" %>
             <%= button_to "Remover", ticket_status_path(status), method: :delete,
-                data: { turbo_confirm: "Tem certeza?" },
+                form: { data: { turbo_confirm: "Tem certeza?" } },
                 class: "text-white font-semibold bg-red-600 hover:bg-red-700 px-3 py-1 rounded" %>
           </td>
         </tr>

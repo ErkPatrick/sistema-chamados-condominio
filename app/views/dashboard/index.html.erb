@@ -56,7 +56,7 @@
       </thead>
       <tbody>
         <% @recent_tickets.each do |ticket| %>
-          <tr class="border-b hover:bg-gray-50">
+          <tr class="border-b hover:bg-gray-50 cursor-pointer" onclick="window.location='<%= ticket_path(ticket) %>'">
             <td class="py-2">#<%= ticket.id %></td>
             <td class="py-2"><%= ticket.unit.identifier %></td>
             <td class="py-2"><%= ticket.ticket_type.title %></td>

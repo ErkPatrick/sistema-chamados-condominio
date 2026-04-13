@@ -1,0 +1,42 @@
+pt-BR:
+  devise:
+    sessions:
+      signed_in: "Login realizado com sucesso."
+      signed_out: "Logout realizado com sucesso."
+      already_signed_in: "Você já está autenticado."
+      failure:
+        invalid: "E-mail ou senha inválidos."
+        locked: "Sua conta está bloqueada."
+        last_attempt: "Mais uma tentativa antes de sua conta ser bloqueada."
+        not_found_in_database: "E-mail ou senha inválidos."
+        timeout: "Sua sessão expirou. Faça login novamente."
+        unauthenticated: "Você precisa fazer login para continuar."
+        unconfirmed: "Você precisa confirmar seu e-mail para continuar."
+    registrations:
+      signed_up: "Cadastro realizado com sucesso."
+      signed_up_but_unconfirmed: "Confirme seu e-mail para continuar."
+      update_needs_confirmation: "Confirme seu novo e-mail para continuar."
+      updated: "Dados atualizados com sucesso."
+      updated_but_not_signed_in: "Seus dados foram atualizados."
+      destroyed: "Conta removida com sucesso."
+    passwords:
+      send_instructions: "Instruções de recuperação enviadas para o seu e-mail."
+      updated: "Senha alterada com sucesso."
+      updated_not_active: "Senha alterada com sucesso."
+      send_paranoid_instructions: "Se o e-mail existir, você receberá as instruções em breve."
+      no_token: "Link de recuperação inválido."
+    confirmations:
+      send_instructions: "Instruções de confirmação enviadas para o seu e-mail."
+      send_paranoid_instructions: "Se o e-mail existir, você receberá as instruções em breve."
+      confirmed: "E-mail confirmado com sucesso."
+    unlocks:
+      send_instructions: "Instruções de desbloqueio enviadas para o seu e-mail."
+      unlocked: "Conta desbloqueada com sucesso."
+      send_paranoid_instructions: "Se o e-mail existir, você receberá as instruções em breve."
+    mailer:
+      confirmation_instructions:
+        subject: "Confirme seu e-mail"
+      reset_password_instructions:
+        subject: "Instruções para redefinir sua senha"
+      unlock_instructions:
+        subject: "Instruções para desbloquear sua conta"
