@@ -1,8 +1,5 @@
 class UnitPolicy < ApplicationPolicy
-  def index?
-    admin_or_collaborator?
-  end
-
+  
   def show?
     admin_or_collaborator?
   end

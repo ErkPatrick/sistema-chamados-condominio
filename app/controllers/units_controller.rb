@@ -1,10 +1,6 @@
 class UnitsController < ApplicationController
   before_action :set_unit, only: [:show]
 
-  def index
-    @units = policy_scope(Unit)
-  end
-
   def show
     authorize @unit
   end

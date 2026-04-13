@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :users, skip: [:registrations]
+  devise_for :users, skip: [:registrations], controllers: {
+    sessions: "users/sessions"
+  }
 
   root to: "dashboard#index"
 
   resources :blocks, only: [:index, :new, :create, :show, :destroy]
-  resources :units, only: [:index, :show] do
+  resources :units, only: [:show] do
     resources :unit_users, only: [:create, :destroy]
   end
   resources :ticket_types, only: [:index, :new, :create, :edit, :update, :destroy]

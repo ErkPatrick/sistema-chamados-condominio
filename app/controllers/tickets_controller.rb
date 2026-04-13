@@ -22,9 +22,17 @@ class TicketsController < ApplicationController
 
   def create
     @ticket = Ticket.new(ticket_params)
+    @ticket.user = current_user
     authorize @ticket
 
     if @ticket.save
+      if params[:attachments].present?
+        params[:attachments].each do |file|
+          attachment = Attachment.new(ticket: @ticket)
+          attachment.file.attach(file)
+          attachment.save
+        end
+      end
       redirect_to ticket_path(@ticket), notice: "Chamado aberto com sucesso!"
     else
       # Recarregar units e ticket_types antes de renderizar o formulário novamente

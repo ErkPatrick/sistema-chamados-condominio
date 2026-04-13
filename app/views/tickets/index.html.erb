@@ -1,0 +1,52 @@
+<% content_for(:title, "Chamados") %>
+
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-2xl font-bold text-gray-800">Chamados</h1>
+  <% if current_user.admin? || current_user.resident? %>
+    <%= link_to "Novo Chamado", new_ticket_path, class: "bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" %>
+  <% end %>
+</div>
+
+<div class="bg-white rounded-lg shadow overflow-hidden">
+  <table class="w-full text-sm">
+    <thead class="bg-gray-50">
+      <tr class="text-left text-gray-500">
+        <th class="px-4 py-3">ID</th>
+        <th class="px-4 py-3">Unidade</th>
+        <th class="px-4 py-3">Tipo</th>
+        <th class="px-4 py-3">Status</th>
+        <th class="px-4 py-3">Aberto em</th>
+        <th class="px-4 py-3">SLA</th>
+        <th class="px-4 py-3">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tickets.each do |ticket| %>
+        <tr class="border-t hover:bg-gray-50">
+          <td class="px-4 py-3">#<%= ticket.id %></td>
+          <td class="px-4 py-3"><%= ticket.unit.identifier %></td>
+          <td class="px-4 py-3"><%= ticket.ticket_type.title %></td>
+          <td class="px-4 py-3">
+            <span class="<%= ticket.ticket_status.is_final? ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' %> text-xs px-2 py-1 rounded">
+              <%= ticket.ticket_status.name %>
+            </span>
+          </td>
+          <td class="px-4 py-3"><%= ticket.opened_at.strftime("%d/%m/%Y") %></td>
+          <td class="px-4 py-3">
+            <% sla_deadline = ticket.opened_at + ticket.ticket_type.sla_hours.hours %>
+            <% if ticket.ticket_status.is_final? %>
+              <span class="text-green-600">Concluído</span>
+            <% elsif Time.current > sla_deadline %>
+              <span class="text-red-600 font-medium">Atrasado</span>
+            <% else %>
+              <span class="text-gray-600"><%= sla_deadline.strftime("%d/%m/%Y") %></span>
+            <% end %>
+          </td>
+          <td class="px-4 py-3">
+            <%= link_to "Ver", ticket_path(ticket), class: "text-blue-600 hover:underline" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
