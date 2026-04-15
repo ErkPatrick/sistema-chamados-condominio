@@ -140,7 +140,7 @@ tickets
 └── timestamps
 
 attachments
-├── id, ticket_id (FK), file
+├── id, ticket_id (FK)
 └── timestamps
 
 comments
