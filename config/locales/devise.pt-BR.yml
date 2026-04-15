@@ -4,14 +4,14 @@ pt-BR:
       signed_in: "Login realizado com sucesso."
       signed_out: "Logout realizado com sucesso."
       already_signed_in: "Você já está autenticado."
-      failure:
+    failure:
         invalid: "E-mail ou senha inválidos."
         locked: "Sua conta está bloqueada."
         last_attempt: "Mais uma tentativa antes de sua conta ser bloqueada."
         not_found_in_database: "E-mail ou senha inválidos."
         timeout: "Sua sessão expirou. Faça login novamente."
         unauthenticated: "Você precisa fazer login para continuar."
-        unconfirmed: "Você precisa confirmar seu e-mail para continuar."
+        unconfirmed: "Você precisa confirmar seu e-mail para continuar."  
     registrations:
       signed_up: "Cadastro realizado com sucesso."
       signed_up_but_unconfirmed: "Confirme seu e-mail para continuar."

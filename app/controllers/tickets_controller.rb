@@ -28,9 +28,14 @@ class TicketsController < ApplicationController
     if @ticket.save
       if params[:attachments].present?
         params[:attachments].each do |file|
+          next unless file.is_a?(ActionDispatch::Http::UploadedFile)
+
           attachment = Attachment.new(ticket: @ticket)
           attachment.file.attach(file)
-          attachment.save
+
+          unless attachment.save
+            Rails.logger.error attachment.errors.full_messages
+          end
         end
       end
       redirect_to ticket_path(@ticket), notice: "Chamado aberto com sucesso!"
