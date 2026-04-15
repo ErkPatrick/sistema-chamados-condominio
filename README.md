@@ -153,7 +153,8 @@ comments
 <img width="1577" height="1544" alt="sistemas_chamados_condominio drawio" src="https://github.com/user-attachments/assets/62a2cbb0-bdf4-4098-97f5-05adc4b64423" />
 
 ---
-
+<br><br><br>
+> Recomenda-se utilizar Docker para execução do projeto.
 ## Instruções de execução com docker
 
 ### Pré-requisitos
@@ -168,7 +169,7 @@ comments
 ```bash
 cp .env.example .env
 ```
-O arquivo .env.example já está configurado para uso com Docker (DB_HOST=db).
+O arquivo .env.example já está configurado para uso com Docker (`DB_HOST=db`).
 
 ### 2. Subir os containers
 
@@ -208,12 +209,12 @@ bundle install
 ### 3. Configurar Variáveis de Ambiente
 Crie o arquivo `.env` na raiz do projeto a partir do exemplo fornecido:
 
-```Bash
+```bash
 cp .env.example .env
 ```
 Para execução manual, altere no arquivo .env:
 
-```Bash
+```bash
 DB_HOST=localhost
 ```
 
