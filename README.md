@@ -107,7 +107,7 @@ O Tailwind CSS foi escolhido por sua abordagem utilitária que permite construir
 
 ---
 
-## Diagrama relacional
+## Diagrama Relacional
 
 ```
 users
@@ -122,7 +122,7 @@ units
 ├── id, block_id (FK), floor, number, identifier
 └── timestamps
 
-unit_users (vínculo morador ↔ unidade)
+unit_users (vínculo morador <==> unidade)
 ├── id, unit_id (FK), user_id (FK)
 └── timestamps
 
@@ -147,6 +147,9 @@ comments
 ├── id, ticket_id (FK), user_id (FK), body
 └── timestamps
 ```
+
+
+<img width="1577" height="1544" alt="sistemas_chamados_condominio drawio" src="https://github.com/user-attachments/assets/62a2cbb0-bdf4-4098-97f5-05adc4b64423" />
 
 ---
 
