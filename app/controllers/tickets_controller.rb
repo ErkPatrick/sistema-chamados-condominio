@@ -34,7 +34,7 @@ class TicketsController < ApplicationController
           attachment.file.attach(file)
 
           unless attachment.save
-            Rails.logger.error attachment.errors.full_messages
+            flash[:alert] = "Erro ao salvar anexo"
           end
         end
       end
