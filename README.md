@@ -13,7 +13,8 @@ Sistema desenvolvido em Ruby on Rails para gerenciamento de chamados em condomí
 - [Funcionalidades](#funcionalidades)
 - [Decisões técnicas](#decisões-técnicas)
 - [Diagrama relacional](#diagrama-relacional)
-- [Instruções de execução](#instruções-de-execução)
+- [Instruções de execução com Docker](instruções-de-execucao-com-docker)
+- [Instruções de execução manual](#instruções-de-execução-manual)
 - [Credenciais iniciais](#credenciais-iniciais)
 - [Contato](#contato)
 
@@ -153,7 +154,34 @@ comments
 
 ---
 
-## Instruções de execução
+## Instruções de execução com docker
+
+### Pré-requisitos
+
+- Docker
+- Docker Compose
+
+---
+
+### 1. Configurar variáveis de ambiente
+
+```bash
+cp .env.example .env
+```
+O arquivo .env.example já está configurado para uso com Docker (DB_HOST=db).
+
+### 2. Subir os containers
+
+```bash
+docker compose up --build
+```
+
+A aplicação estará disponível em:
+
+`http://localhost:3000`
+
+---
+## Instruções de execução manual
 
 ### Pré-requisitos
 
@@ -183,7 +211,11 @@ Crie o arquivo `.env` na raiz do projeto a partir do exemplo fornecido:
 ```Bash
 cp .env.example .env
 ```
-Nota: Certifique-se de que o arquivo .env contém as credenciais corretas para o seu ambiente local. O arquivo config/database.yml já está configurado para ler estas variáveis automaticamente.
+Para execução manual, altere no arquivo .env:
+
+```Bash
+DB_HOST=localhost
+```
 
 
 ### 4. Configurar o Banco de Dados
