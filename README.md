@@ -174,40 +174,22 @@ cd sistema-chamados-condominio
 bundle install
 ```
 
-### 3. Configurar o banco de dados
+### 3. Configurar Variáveis de Ambiente
+Crie o arquivo `.env` na raiz do projeto a partir do exemplo fornecido:
 
+```Bash
+cp .env.example .env
+```
+Nota: Certifique-se de que o arquivo .env contém as credenciais corretas para o seu ambiente local. O arquivo config/database.yml já está configurado para ler estas variáveis automaticamente.
+
+
+### 4. Configurar o Banco de Dados
 Crie um usuário no PostgreSQL:
 
 ```bash
 sudo -u postgres psql -c "CREATE USER condominium WITH PASSWORD 'password123' CREATEDB;"
 ```
-
-Configure o arquivo `config/database.yml` com as credenciais:
-
-```yaml
-default: &default
-  adapter: postgresql
-  encoding: unicode
-  max_connections: 5
-
-development:
-  <<: *default
-  database: condominium_tickets_development
-  username: condominium
-  password: password123
-  host: localhost
-  port: 5432
-
-test:
-  <<: *default
-  database: condominium_tickets_test
-  username: condominium
-  password: password123
-  host: localhost
-  port: 5432
-```
-
-### 4. Criar o banco, rodar migrations e seeds
+### 5. Criar o banco, rodar migrations e seeds
 
 ```bash
 rails db:create
@@ -215,7 +197,7 @@ rails db:migrate
 rails db:seed
 ```
 
-### 5. Iniciar o servidor
+### 6. Iniciar o servidor
 
 ```bash
 bin/dev
