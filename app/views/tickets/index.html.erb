@@ -22,12 +22,12 @@
           class: "border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" %>
     </div>
     <div>
-      <%= f.label :date_from, "Data de abertura", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.label :date_from, "De", class: "block text-sm font-medium text-gray-700 mb-1" %>
       <%= f.date_field :date_from, value: params[:date_from],
           class: "border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" %>
     </div>
     <div>
-      <%= f.label :date_to, "Data de fechamento", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.label :date_to, "Até", class: "block text-sm font-medium text-gray-700 mb-1" %>
       <%= f.date_field :date_to, value: params[:date_to],
           class: "border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" %>
     </div>
