@@ -4,7 +4,9 @@ class AttachmentsController < ApplicationController
   def create
     @attachment = Attachment.new
     @attachment.ticket = @ticket
-    @attachment.file.attach(params[:attachment][:file])  # Envia o arquivo para o Active Storage
+    if params[:attachment] && params[:attachment][:file].present?
+      @attachment.file.attach(params[:attachment][:file])
+    end
     authorize @attachment
 
     if @attachment.save
