@@ -25,15 +25,40 @@
 
 <div class="bg-white rounded-lg shadow p-6">
   <h2 class="text-lg font-semibold text-gray-800 mb-4">
-    Unidades: (<%= @block.units.count %>)
+    Unidades (<%= @block.units.count %>)
   </h2>
-  <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
-    <% @block.units.order(:floor, :number).each do |unit| %>
-      <%= link_to unit_path(unit), class: "border rounded-lg p-3 text-center hover:bg-blue-50 hover:border-blue-300 transition" do %>
-        <p class="font-medium text-gray-800"><%= unit.identifier %></p>
-        <p class="text-xs text-gray-500">Andar <%= unit.floor %></p>
-        <p class="text-xs text-gray-500"><%= unit.users.count %> morador(es)</p>
+
+  <div class="mb-4">
+    <%= form_with url: block_path(@block), method: :get, class: "flex gap-3 items-end" do |f| %>
+      <div>
+        <%= f.label :identifier, "Identificador", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.text_field :identifier, value: params[:identifier], placeholder: "Ex: A-101",
+            class: "border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+      </div>
+      <div>
+        <%= f.label :floor, "Andar", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.select :floor, (1..@block.floors).map { |f| [f, f] },
+            { include_blank: "Todos" },
+            class: "border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+      </div>
+      <%= f.submit "Filtrar", class: "bg-blue-600 text-white px-4 py-2 rounded text-sm hover:bg-blue-700 cursor-pointer" %>
+      <% if params[:identifier].present? || params[:floor].present? %>
+        <%= link_to "Limpar", block_path(@block), class: "bg-gray-200 text-gray-700 px-4 py-2 rounded text-sm hover:bg-gray-300" %>
       <% end %>
     <% end %>
   </div>
+
+  <% if @units.any? %>
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+      <% @units.each do |unit| %>
+        <%= link_to unit_path(unit), class: "border rounded-lg p-3 text-center hover:bg-blue-50 hover:border-blue-300 transition" do %>
+          <p class="font-medium text-gray-800"><%= unit.identifier %></p>
+          <p class="text-xs text-gray-500">Andar <%= unit.floor %></p>
+          <p class="text-xs text-gray-500"><%= unit.users.count %> morador(es)</p>
+        <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-gray-400 text-sm">Nenhuma unidade encontrada.</p>
+  <% end %>
 </div>

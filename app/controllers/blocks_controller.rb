@@ -3,10 +3,14 @@ class BlocksController < ApplicationController
 
   def index
     @blocks = policy_scope(Block)
+    @blocks = @blocks.where("identifier ILIKE ?", "%#{params[:identifier]}%") if params[:identifier].present?
   end
 
   def show
     authorize @block
+    @units = @block.units.order(:floor, :number)
+    @units = @units.where("identifier ILIKE ?", "%#{params[:identifier]}%") if params[:identifier].present?
+    @units = @units.where(floor: params[:floor]) if params[:floor].present?
   end
 
   def new

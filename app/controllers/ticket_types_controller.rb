@@ -3,6 +3,7 @@ class TicketTypesController < ApplicationController
 
   def index
     @ticket_types = policy_scope(TicketType)
+    @ticket_types = @ticket_types.where("title ILIKE ?", "%#{params[:title]}%") if params[:title].present?
   end
 
   def new

@@ -2,7 +2,14 @@ class TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :update_status]
 
   def index
+    @ticket_types = TicketType.all
+    @ticket_statuses = TicketStatus.all
     @tickets = policy_scope(Ticket)
+    @tickets = @tickets.where(ticket_type_id: params[:ticket_type_id]) if params[:ticket_type_id].present?
+    @tickets = @tickets.where(ticket_status_id: params[:ticket_status_id]) if params[:ticket_status_id].present?
+    @tickets = @tickets.where("opened_at >= ?", params[:date_from].to_date.beginning_of_day) if params[:date_from].present?
+    @tickets = @tickets.where("opened_at <= ?", params[:date_to].to_date.end_of_day) if params[:date_to].present?
+    @tickets = @tickets.order(opened_at: :desc)
   end
 
   def show

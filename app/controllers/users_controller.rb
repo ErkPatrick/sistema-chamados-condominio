@@ -3,6 +3,9 @@ class UsersController < ApplicationController
 
   def index
     @users = policy_scope(User)  # equivalente => UserPolicy::Scope.new(current_user, User.all).resolve
+    @users = @users.where("name ILIKE ?", "%#{params[:name]}%") if params[:name].present?
+    @users = @users.where("email ILIKE ?", "%#{params[:email]}%") if params[:email].present?
+    @users = @users.where(role: params[:role]) if params[:role].present?
   end
 
   def show

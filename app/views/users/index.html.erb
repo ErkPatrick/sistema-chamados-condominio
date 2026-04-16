@@ -5,6 +5,31 @@
   <%= link_to "Novo Usuário", new_user_path, class: "bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" %>
 </div>
 
+<div class="bg-white rounded-lg shadow p-4 mb-4">
+  <%= form_with url: users_path, method: :get, class: "flex gap-3 items-end flex-wrap" do |f| %>
+    <div>
+      <%= f.label :name, "Nome", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.text_field :name, value: params[:name], placeholder: "Buscar por nome...",
+          class: "border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+    <div>
+      <%= f.label :email, "E-mail", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.text_field :email, value: params[:email], placeholder: "Buscar por e-mail...",
+          class: "border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+    <div>
+      <%= f.label :role, "Perfil", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.select :role, [["Administrador", "admin"], ["Colaborador", "collaborator"], ["Morador", "resident"]],
+          { include_blank: "Todos" },
+          class: "border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+    <%= f.submit "Filtrar", class: "bg-blue-600 text-white px-4 py-2 rounded text-sm hover:bg-blue-700 cursor-pointer" %>
+    <% if params[:name].present? || params[:email].present? || params[:role].present? %>
+      <%= link_to "Limpar", users_path, class: "bg-gray-200 text-gray-700 px-4 py-2 rounded text-sm hover:bg-gray-300" %>
+    <% end %>
+  <% end %>
+</div>
+
 <div class="bg-white rounded-lg shadow overflow-hidden">
   <table class="w-full text-sm">
     <thead class="bg-gray-50">
@@ -16,25 +41,31 @@
       </tr>
     </thead>
     <tbody>
-      <% @users.each do |user| %>
-        <tr class="border-t hover:bg-gray-50">
-          <td class="px-4 py-3"><%= user.name %></td>
-          <td class="px-4 py-3"><%= user.email %></td>
-          <td class="px-4 py-3">
-            <% if user.admin? %>
-              <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Administrador</span>
-            <% elsif user.collaborator? %>
-              <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Colaborador</span>
-            <% elsif user.resident? %>
-              <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Morador</span>
-            <% end %>
-          </td>
-          <td class="px-4 py-3 flex gap-2">
-            <%= link_to "Ver", user_path(user), class: "text-white font-semibold bg-blue-500 px-2 py-1 rounded cursor-pointer hover:bg-blue-600" %>
-            <%= link_to "Editar", edit_user_path(user), class: "text-white font-semibold bg-yellow-500 px-2 py-1 rounded cursor-pointer hover:bg-yellow-600" %>
-            <%= button_to "Remover", user_path(user), method: :delete, form: { data: { turbo_confirm: "Tem certeza?" } }, class: "text-white font-semibold bg-red-500 px-2 py-1 rounded cursor-pointer hover:bg-red-600" %>
-          </td>
-        </tr>
+      <% if @users.any? %>
+        <% @users.each do |user| %>
+          <tr class="border-t hover:bg-gray-50">
+            <td class="px-4 py-3"><%= user.name %></td>
+            <td class="px-4 py-3"><%= user.email %></td>
+            <td class="px-4 py-3">
+              <% if user.admin? %>
+                <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Administrador</span>
+              <% elsif user.collaborator? %>
+                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Colaborador</span>
+              <% elsif user.resident? %>
+                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Morador</span>
+              <% end %>
+            </td>
+            <td class="px-4 py-3 flex gap-2">
+              <%= link_to "Ver", user_path(user), class: "text-white font-semibold bg-blue-500 px-2 py-1 rounded cursor-pointer hover:bg-blue-600" %>
+              <%= link_to "Editar", edit_user_path(user), class: "text-white font-semibold bg-yellow-500 px-2 py-1 rounded cursor-pointer hover:bg-yellow-600" %>
+              <%= button_to "Remover", user_path(user), method: :delete,
+                  form: { data: { turbo_confirm: "Tem certeza?" } },
+                  class: "text-white font-semibold bg-red-500 px-2 py-1 rounded cursor-pointer hover:bg-red-600" %>
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr><td colspan="4" class="px-4 py-6 text-center text-gray-400">Nenhum usuário encontrado.</td></tr>
       <% end %>
     </tbody>
   </table>
