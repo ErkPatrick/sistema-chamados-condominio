@@ -1,7 +1,5 @@
 # Sistema de Gerenciamento de Chamados para Condomínio
 
-Desafio Técnico — Processo Seletivo Dunnas (Desafio N° 0004/2026)
-
 Sistema desenvolvido em Ruby on Rails para gerenciamento de chamados em condomínios, com suporte a múltiplos perfis de usuário, controle de acesso, SLA e histórico de interações.
 
 ---
@@ -274,6 +272,6 @@ Após rodar os seeds, o sistema já estará configurado com:
 
 ## Contato
 
-Desenvolvido por Erick Patrick de Paula Morais Freitas para o processo seletivo da Dunnas Tecnologia.
+Desenvolvido por Erick Patrick de Paula Morais Freitas.
 
 Entre em contato por e-mail: erick.patrickfreitas@gmail.com
